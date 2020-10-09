@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block editTemp %}
+<div class="container">
+   <div class="row">
+      <div class="col-lg-12 text-center m-4">
+         <h2>INSERT DATA TO DB</h2>
+      </div>
+   </div>
+   <hr>
+   {% for p in emplist %}
+   <form class="form-horizontal col-xs-12 col-lg-12 col-md-12 col-sm-12" method="POST" action="{{url_for('update_emp_records')}}" name="wform" >
+      <div class="row sec1 mb-4">
+         <div class="form-group col-lg-4 col-sm-12">
+            <label for="uname">Name</label>
+            <input type="text" class="form-control" id="uname" placeholder="name" value="{{p['_id']}}" name="uname" disabled>
+         </div>
+         <div class="form-group col-lg-4 col-sm-12">
+            <label for="uname">Name</label>
+            <input type="text" class="form-control" id="uname" placeholder="name" value="{{p['name']}}" name="uname" required>
+         </div>
+         <div class="form-group col-4">
+            <label for="desg">Designation </label>
+            <input type="text" class="form-control" id="desg" placeholder="Designation" value="{{p['designation']}}" name="desg" required>
+         </div>
+         <div class="form-group col-lg-4 col-sm-12">
+            <label for="phone">Contact</label>
+            <input type="text" class="form-control" id="phone" placeholder="Contact Number" value="{{p['contact']}}" name="phone" required>
+         </div>
+         <div class="form-group col-4">
+            <label for="addrs">Address </label>
+            <input type="text" class="form-control" id="addrs" placeholder="Enter Address" value="{{p['address']}}" name="addrs" required>
+         </div>
+         <div class="form-group col-4">
+            <label for="email">Mail Id </label>
+            <input type="text" class="form-control" id="email" placeholder="Designation" value="{{p['mailId']}}" name="email" required>
+         </div>
+         <div class="form-group col-4 float-right">
+            <button type="Submit" class="btn btn-primary">Submit</button>
+         </div>
+      </div>
+   </form>
+   {% endfor %}
+{% endblock %}
