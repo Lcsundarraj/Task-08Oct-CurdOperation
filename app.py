@@ -24,9 +24,8 @@ def index():
 	return render_template('form.html', emplist = empdetails_list )
 
 
-
 #update records in DB
-@app.route("/", methods=['POST'])
+@app.route("/update", methods=['POST'])
 def update_emp_records():	
 	#Empty List
 	empRecords = {}
@@ -44,11 +43,14 @@ def update_emp_records():
 	empRecords["mailId"]=mailId
 	#print records in cmd
 	print(empRecords)
+	print(request.form['id'])
 	#send to db
-	if (request.form['_id']==True):
-		empid=request.form['_id']
-		update_emp = emp_db.get_one_emplyoee_details(empid)
-		emp_db.update_one_record(empid, update_emp)
+	
+	if (request.form['id']):
+		empid=request.form['id']
+		#update_emp = emp_db.get_one_emplyoee_details(empid)
+		#print(update_emp)
+		emp_db.update_one_record(empid, empRecords)
 
 	else:
 		emp_db.save_employee_data(empRecords)
@@ -59,6 +61,7 @@ def update_emp_records():
 def deleteRecord(emp_id):
     empid = emp_id
     emp_db.delete_record(empid)
+    #msg="delete "+empid+" record successfully !!!"
     return redirect(url_for('index'))
 
 
@@ -69,6 +72,12 @@ def edit_Record(emp_id):
     one_emp_info = emp_db.get_one_emplyoee_details(empid)
     return render_template('edit_form.html', emplist = one_emp_info)
 
+
+@app.route("/remove_field/<emp_id>", methods=['POST'])
+def remove_one_field(emp_id):
+    empid = emp_id    
+    emp_db.update_field(empid)
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
