@@ -23,9 +23,7 @@ def index():
 		empdetails_list.append(e)
 	return render_template('form.html', emplist = empdetails_list )
 
-
-@app.route("/", methods=['POST'])
-def update_empRecords():	
+def setData():
 	#Empty List
 	empRecords = {}
 	#request data from UI
@@ -40,6 +38,28 @@ def update_empRecords():
 	empRecords["contact"]=contact
 	empRecords["address"]=address
 	empRecords["mailId"]=mailId
+	return empRecords
+
+
+@app.route("/", methods=['POST'])
+def update_empRecords():	
+	"""
+	#Empty List
+	empRecords = {}
+	#request data from UI
+	name = request.form['uname']
+	designation = request.form['desg']
+	contact = request.form['phone']
+	address = request.form['addrs']
+	mailId =  request.form['email']
+	#set data to the Empty list
+	empRecords["name"]=name
+	empRecords["designation"]=designation
+	empRecords["contact"]=contact
+	empRecords["address"]=address
+	empRecords["mailId"]=mailId
+	"""
+	empRecords = setData()
 	#print records in cmd
 	print(empRecords)
 
@@ -49,6 +69,7 @@ def update_empRecords():
 #update records in DB
 @app.route("/update", methods=['POST'])
 def update_emp_records():	
+	"""
 	#Empty List
 	empRecords = {}
 	#request data from UI
@@ -63,6 +84,8 @@ def update_emp_records():
 	empRecords["contact"]=contact
 	empRecords["address"]=address
 	empRecords["mailId"]=mailId
+	"""
+	empRecords = setData()
 	#print records in cmd
 	print(empRecords)
 	print(request.form['id'])
