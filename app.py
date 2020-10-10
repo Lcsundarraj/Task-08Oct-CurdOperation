@@ -24,6 +24,28 @@ def index():
 	return render_template('form.html', emplist = empdetails_list )
 
 
+@app.route("/", methods=['POST'])
+def update_empRecords():	
+	#Empty List
+	empRecords = {}
+	#request data from UI
+	name = request.form['uname']
+	designation = request.form['desg']
+	contact = request.form['phone']
+	address = request.form['addrs']
+	mailId =  request.form['email']
+	#set data to the Empty list
+	empRecords["name"]=name
+	empRecords["designation"]=designation
+	empRecords["contact"]=contact
+	empRecords["address"]=address
+	empRecords["mailId"]=mailId
+	#print records in cmd
+	print(empRecords)
+
+	emp_db.save_employee_data(empRecords)
+	return redirect(url_for('index'))
+
 #update records in DB
 @app.route("/update", methods=['POST'])
 def update_emp_records():	
@@ -45,15 +67,10 @@ def update_emp_records():
 	print(empRecords)
 	print(request.form['id'])
 	#send to db
-	
-	if (request.form['id']):
-		empid=request.form['id']
-		#update_emp = emp_db.get_one_emplyoee_details(empid)
-		#print(update_emp)
-		emp_db.update_one_record(empid, empRecords)
-
-	else:
-		emp_db.save_employee_data(empRecords)
+	empid=request.form['id']
+	#update_emp = emp_db.get_one_emplyoee_details(empid)
+	#print(update_emp)
+	emp_db.update_one_record(empid, empRecords)
 	return redirect(url_for('index'))
 
 
