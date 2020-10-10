@@ -55,5 +55,5 @@ def update_one_record(empid, empRecords):
 def update_field(empid):
 	global col
 	connect_db()
-	col.update({"_id": ObjectId(empid)}, {'$unset' :{'designation':""}})
+	col.update({"_id": ObjectId(empid)}, {'$unset' :{'designation':"", 'contact':"", 'address':"", 'mailId':""}})
 	return
