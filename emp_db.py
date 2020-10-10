@@ -49,7 +49,7 @@ def delete_record(emp_id):
 def update_one_record(empid, empRecords):
     global col
     connect_db()    
-    col.update_one({"_id": ObjectId(empid)}, {'$set' :{'name':empRecords["name"], 'designation':empRecords["designation"], 'contact':empRecords["contact"]} })
+    col.update_one({"_id": ObjectId(empid)}, {'$set' :{'name':empRecords["name"], 'designation':empRecords["designation"], 'contact':empRecords["contact"], 'address':empRecords["address"], 'mailId':empRecords["mailId"]} })
     return
 
 def update_field(empid):
